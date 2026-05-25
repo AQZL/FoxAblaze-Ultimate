@@ -69,6 +69,8 @@ public class UrielConfig extends ManasConfig {
         public int imprisonDuration = 200;
         @Comment("Cooldown after a successful Imprison (ticks). 20 ticks = 1 sec.")
         public int imprisonCooldown = 200;
+        @Comment("Cooldown applied when an Imprison attempt fails (no target / EP gate). Default 60 ticks = 3 sec.")
+        public int imprisonFailCooldown = 60;
         @Comment("Imprison fails when target's max EP exceeds caster's max EP × this. 1.0 = exact parity. Higher → easier to imprison stronger foes.")
         public double imprisonEPGate = 1.0;
 

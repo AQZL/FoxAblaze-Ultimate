@@ -314,7 +314,7 @@ public class UrielSkill extends Skill implements ISpatialStorage {
         if (target == null) {
             entity.sendSystemMessage(Component.translatable("tensura.targeting.not_targeted")
                     .withStyle(ChatFormatting.RED));
-            instance.setCoolDown(masteredCd(c.imprisonCooldown / 2, instance, entity), mode);
+            instance.setCoolDown(masteredCd(c.imprisonFailCooldown, instance, entity), mode);
             return;
         }
 
@@ -335,6 +335,7 @@ public class UrielSkill extends Skill implements ISpatialStorage {
                 TensuraStorages.getExistenceFrom(entity).getEP() * epGate) {
             entity.sendSystemMessage(Component.translatable("tensura.targeting.not_allowed")
                     .withStyle(ChatFormatting.RED));
+            instance.setCoolDown(masteredCd(c.imprisonFailCooldown, instance, entity), mode);
             return;
         }
 
