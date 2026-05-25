@@ -1,0 +1,29 @@
+{
+  "raphael.fusion_declaration": {
+    "sounds": [
+      {
+        "name": "foxablazeultimate:raphael/fusion_declaration",
+        "stream": true,
+        "attenuation_distance": 0
+      }
+    ]
+  },
+  "beelzebub.fusion_declaration": {
+    "sounds": [
+      {
+        "name": "foxablazeultimate:beelzebub/fusion_declaration",
+        "stream": true,
+        "attenuation_distance": 0
+      }
+    ]
+  },
+  "uriel.skill_declaration": {
+    "sounds": [
+      {
+        "name": "foxablazeultimate:uriel/skill_declaration",
+        "stream": true,
+        "attenuation_distance": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.foxablazeultimate.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MixinMagic",
+    "MixinPredatorMistProjectile"
+  ],
+  "client": [
+    "client.MixinSpatialStorageScreen"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
