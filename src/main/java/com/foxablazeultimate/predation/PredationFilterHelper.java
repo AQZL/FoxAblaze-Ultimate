@@ -23,6 +23,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 
+/**
+ * 拉斐尔捕食过滤器存储助手。
+ *
+ * <p>过滤器数据保存在玩家拉斐尔技能实例的 NBT 上：
+ * <ul>
+ *   <li>{@link #NBT_FILTER}: {@code ListTag}，每一项是 {@code ItemStack#saveOptional} 输出的 {@code CompoundTag}，
+ *       并额外写入一个 byte {@code "Slot"} 标识在过滤器里的位置；</li>
+ *   <li>{@link #NBT_EXTRA_SLOTS}: int，管理员命令额外开放的过滤槽数。</li>
+ * </ul>
+ *
+ * <p>过滤逻辑只比较 {@link Item}，不比较 NBT，以减少误判。
+ */
 public final class PredationFilterHelper {
     public static final int BASE_SLOTS = 9;
     public static final int MASTERED_SLOTS = 12;
@@ -61,6 +73,7 @@ public final class PredationFilterHelper {
         return next;
     }
 
+    /** 读取过滤器内容为 {@code slots} 长度的 list，缺省项为 {@link ItemStack#EMPTY}。 */
     public static List<ItemStack> loadList(Player player, int slots) {
         List<ItemStack> list = new ArrayList<>(slots);
         for (int i = 0; i < slots; i++) list.add(ItemStack.EMPTY);
@@ -70,6 +83,17 @@ public final class PredationFilterHelper {
         return list;
     }
 
+    /**
+     * 服务端：单槽更新接口。客户端发包后调用，最后会通过 {@link #sendSync} 推回全量同步。
+     *
+     * <p>放置规则（与客户端 {@code PredationFilterOverlay.canAccept} 保持一致）：
+     * <ul>
+     *   <li>{@code ghost} 非空时必须是 {@link BlockItem}（方块对应物品）；</li>
+     *   <li>除目标槽位外，其它已用槽位不能已经有同一种 {@link Item}；</li>
+     *   <li>清空槽位（{@code ghost} 为空）永远允许。</li>
+     * </ul>
+     * <p>违反任一条都会拒收并 {@link #sendSync} 回滚客户端可能的乐观更新。
+     */
     public static void setSlot(ServerPlayer player, int slot, ItemStack ghost) {
         Optional<ManasSkillInstance> opt = getRaphael(player);
         if (opt.isEmpty()) return;
@@ -81,12 +105,12 @@ public final class PredationFilterHelper {
         List<ItemStack> list = loadList(player, slots);
 
         if (!normalized.isEmpty()) {
-
+            // 只允许 BlockItem
             if (!(normalized.getItem() instanceof BlockItem)) {
-                sendSync(player);
+                sendSync(player); // 把客户端可能的乐观更新滚回
                 return;
             }
-
+            // 不允许与其它槽位重复
             for (int i = 0; i < list.size(); i++) {
                 if (i == slot) continue;
                 ItemStack entry = list.get(i);
@@ -102,6 +126,7 @@ public final class PredationFilterHelper {
         sendSync(player);
     }
 
+    /** 服务端：向客户端推送完整过滤器状态（槽数 + 内容）。 */
     public static void sendSync(ServerPlayer player) {
         Optional<ManasSkillInstance> opt = getRaphael(player);
         if (opt.isEmpty()) {

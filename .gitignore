@@ -49,3 +49,4 @@ strip_comments_to_local.py
 *.png
 !src/main/resources/**/*.png
 !src/main/resources/**/*.ogg
+.vscode-localcomments/

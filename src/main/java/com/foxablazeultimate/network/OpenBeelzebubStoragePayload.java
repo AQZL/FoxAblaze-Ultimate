@@ -10,6 +10,10 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 
+/**
+ * 服务端通知客户端打开别西卜虚数胃袋 GUI。
+ * <p>结构与 {@code OpenSpatialStorageMenuPayload} 同构，但单一 storageType——别西卜的 GUI 没有"切到 enchanting"分支。
+ */
 public record OpenBeelzebubStoragePayload(
         int containerId,
         int size,
@@ -38,6 +42,10 @@ public record OpenBeelzebubStoragePayload(
         buf.writeResourceLocation(this.skill);
     }
 
+    /**
+     * 通过 architectury NetworkManager 注册，handle 仅在客户端线程上分派到 {@link FoxAblazeUltimateClientAccess}
+     * 真正打开 Screen，避免在服务端 jar 加载客户端类导致 {@code NoClassDefFoundError}。
+     */
     public void handle(NetworkManager.PacketContext context) {
         if (context.getEnvironment() == Env.CLIENT) {
             context.queue(() -> FoxAblazeUltimateClientAccess.handleOpenBeelzebubStorage(this));
