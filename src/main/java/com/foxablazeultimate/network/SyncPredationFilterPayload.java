@@ -14,12 +14,6 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-/**
- * S2C：服务端把玩家拉斐尔捕食过滤器内容全量推到客户端，供 {@code PredationFilterOverlay} 渲染。
- *
- * <p>{@code items} 长度恒等于 {@code slotCount}；空槽用 {@link ItemStack#EMPTY}。如果玩家没有拉斐尔，
- * {@code slotCount = 0}, {@code items} 为空。
- */
 public record SyncPredationFilterPayload(int slotCount, List<ItemStack> items) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<SyncPredationFilterPayload> TYPE =
             new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(

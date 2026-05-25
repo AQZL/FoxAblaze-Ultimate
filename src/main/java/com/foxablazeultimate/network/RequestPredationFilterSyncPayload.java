@@ -10,11 +10,6 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
-/**
- * C2S：客户端打开（或刷新）暴食/暴食之王 GUI 时请求服务端推送当前过滤器内容。
- *
- * <p>无 payload 数据。服务端收到后调用 {@link PredationFilterHelper#sendSync} 回推 {@link SyncPredationFilterPayload}。
- */
 public record RequestPredationFilterSyncPayload() implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<RequestPredationFilterSyncPayload> TYPE =
             new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(

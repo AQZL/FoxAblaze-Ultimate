@@ -11,12 +11,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
-/**
- * C2S：客户端在过滤器叠加层点击某个过滤槽时发包，把这一槽的"鬼影物品"写入服务端。
- *
- * <p>{@code ghost} 永远是数量被截到 1 的副本；空 {@link ItemStack#EMPTY} 表示清空该槽。
- * 服务端校验玩家是否仍持有拉斐尔后写入 NBT，并通过 {@link SyncPredationFilterPayload} 广播完整状态。
- */
 public record UpdatePredationFilterPayload(int slot, ItemStack ghost) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<UpdatePredationFilterPayload> TYPE =
             new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(
