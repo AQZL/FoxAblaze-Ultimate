@@ -52,6 +52,8 @@
   "item.foxablazeultimate.captured_entity.type": "Type: %s",
   "item.foxablazeultimate.captured_entity.ep": "EP: %s",
   "item.foxablazeultimate.captured_entity.release_hint": "§oLeft-click in the Imaginary Space to summon it ahead",
+  "item.foxablazeultimate.wisdom_crystal": "Wisdom Crystal",
+  "effect.foxablazeultimate.wisdom_buff": "Wisdom Crystal",
   "foxablazeultimate.beelzebub.capture.success": "Devoured %s",
   "foxablazeultimate.beelzebub.fluid.extract_hint_water": "§oRight-click with bucket / sponge / glass bottle to extract",
   "foxablazeultimate.beelzebub.fluid.extract_hint_lava": "§oRight-click with empty bucket to extract",

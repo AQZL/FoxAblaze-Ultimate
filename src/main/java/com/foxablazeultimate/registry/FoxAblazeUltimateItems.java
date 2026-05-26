@@ -1,6 +1,7 @@
 package com.foxablazeultimate.registry;
 
 import com.foxablazeultimate.FoxAblazeUltimateMod;
+import com.foxablazeultimate.item.WisdomCrystalItem;
 import com.foxablazeultimate.item.beelzebub.CapturedEntityItem;
 
 import net.minecraft.world.item.Item;
@@ -16,6 +17,10 @@ public final class FoxAblazeUltimateItems {
     public static final DeferredHolder<Item, CapturedEntityItem> CAPTURED_ENTITY =
             ITEMS.register("captured_entity",
                     () -> new CapturedEntityItem(new Item.Properties()));
+
+    public static final DeferredHolder<Item, WisdomCrystalItem> WISDOM_CRYSTAL =
+            ITEMS.register("wisdom_crystal",
+                    () -> new WisdomCrystalItem(new Item.Properties()));
 
     private FoxAblazeUltimateItems() {}
 

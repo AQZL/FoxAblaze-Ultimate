@@ -1,6 +1,7 @@
 package com.foxablazeultimate.event;
 
 import com.foxablazeultimate.FoxAblazeUltimateMod;
+import com.foxablazeultimate.item.WisdomCrystalLockState;
 import com.foxablazeultimate.world.FoxAblazeGameRules;
 
 import dev.architectury.event.EventResult;
@@ -9,6 +10,7 @@ import io.github.manasmods.manascore.skill.api.SkillEvents;
 import io.github.manasmods.tensura.ability.skill.Skill;
 import io.github.manasmods.tensura.ability.skill.Skill.SkillType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 
 public final class UltimateSkillProtector {
@@ -18,6 +20,15 @@ public final class UltimateSkillProtector {
     public static void init() {
         SkillEvents.REMOVE_SKILL.register((instance, owner, forgetMessage) -> {
             if (instance == null || owner == null) return EventResult.pass();
+            ResourceLocation skillId = instance.getSkillId();
+
+            if (skillId != null
+                    && owner instanceof ServerPlayer player
+                    && WisdomCrystalLockState.isCrystalLocked(player, skillId)
+                    && !STExtrasLoadedSafe()) {
+                return EventResult.interrupt(false);
+            }
+
             Level level = owner.level();
             if (level == null) return EventResult.pass();
             if (!level.getGameRules().getBoolean(FoxAblazeGameRules.PROTECT_ULTIMATE_ON_RESET)) {
@@ -26,6 +37,14 @@ public final class UltimateSkillProtector {
             if (!isProtectedUltimate(instance.getSkill())) return EventResult.pass();
             return EventResult.interrupt(false);
         });
+    }
+
+    private static boolean STExtrasLoadedSafe() {
+        try {
+            return com.foxablazeultimate.compat.stextras.STExtrasCompat.isLoaded();
+        } catch (Throwable t) {
+            return false;
+        }
     }
 
     private static boolean isProtectedUltimate(ManasSkill skill) {

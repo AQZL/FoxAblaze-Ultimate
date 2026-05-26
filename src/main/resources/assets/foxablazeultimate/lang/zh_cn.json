@@ -52,6 +52,8 @@
   "item.foxablazeultimate.captured_entity.type": "类型：%s",
   "item.foxablazeultimate.captured_entity.ep": "存在值：%s",
   "item.foxablazeultimate.captured_entity.release_hint": "§o虚数空间中左键点击即可召唤到面前",
+  "item.foxablazeultimate.wisdom_crystal": "智慧结晶",
+  "effect.foxablazeultimate.wisdom_buff": "智慧结晶",
   "foxablazeultimate.beelzebub.capture.success": "吞噬 %s",
   "foxablazeultimate.beelzebub.fluid.extract_hint_water": "§o右键空桶/海绵/玻璃瓶可抽取",
   "foxablazeultimate.beelzebub.fluid.extract_hint_lava": "§o右键空桶可抽取",

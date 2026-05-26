@@ -1,0 +1,13 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "com.foxablazeultimate.mixin.stextras",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "com.foxablazeultimate.mixin.stextras.FoxAblazeStextrasMixinPlugin",
+  "mixins": [
+    "STExtrasIsSkillValidUnlockRaphaelMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

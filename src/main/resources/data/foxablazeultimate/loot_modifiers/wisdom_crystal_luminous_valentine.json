@@ -1,0 +1,13 @@
+{
+  "type": "foxablazeultimate:add_wisdom_crystal",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "tensura_neb:entities/luminous_valentine"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.25
+    }
+  ]
+}

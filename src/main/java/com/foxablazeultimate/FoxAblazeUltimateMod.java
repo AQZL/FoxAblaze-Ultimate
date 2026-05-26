@@ -11,10 +11,13 @@ import com.foxablazeultimate.network.OpenRaphaelNamingPayload;
 import com.foxablazeultimate.network.RequestBeelzebubFluidExtractPayload;
 import com.foxablazeultimate.network.RequestPredationFilterSyncPayload;
 import com.foxablazeultimate.network.RequestRaphaelRenamePayload;
+import com.foxablazeultimate.network.SyncCrystalLockPayload;
 import com.foxablazeultimate.network.SyncPredationFilterPayload;
 import com.foxablazeultimate.network.UpdatePredationFilterPayload;
 import com.foxablazeultimate.registry.FoxAblazeUltimateDataComponents;
 import com.foxablazeultimate.registry.FoxAblazeUltimateItems;
+import com.foxablazeultimate.registry.FoxAblazeUltimateLootModifiers;
+import com.foxablazeultimate.registry.FoxAblazeUltimateMobEffects;
 import com.foxablazeultimate.registry.FoxAblazeUltimateSkills;
 import com.foxablazeultimate.registry.FoxAblazeUltimateSounds;
 import com.foxablazeultimate.world.FoxAblazeGameRules;
@@ -52,7 +55,9 @@ public class FoxAblazeUltimateMod {
         FoxAblazeUltimateSkills.register(modBus);
         FoxAblazeUltimateSounds.register(modBus);
         FoxAblazeUltimateItems.register(modBus);
+        FoxAblazeUltimateMobEffects.register(modBus);
         FoxAblazeUltimateDataComponents.register(modBus);
+        FoxAblazeUltimateLootModifiers.register(modBus);
 
         NetworkUtils.registerS2CPayload(
                 OpenBeelzebubStoragePayload.TYPE,
@@ -88,6 +93,11 @@ public class FoxAblazeUltimateMod {
                 RequestRaphaelRenamePayload.TYPE,
                 RequestRaphaelRenamePayload.STREAM_CODEC,
                 RequestRaphaelRenamePayload::handle);
+
+        NetworkUtils.registerS2CPayload(
+                SyncCrystalLockPayload.TYPE,
+                SyncCrystalLockPayload.STREAM_CODEC,
+                SyncCrystalLockPayload::handle);
 
         LOGGER.info("[FoxAblazeUltimate] 加载完成");
     }
